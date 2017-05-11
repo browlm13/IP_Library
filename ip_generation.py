@@ -107,7 +107,8 @@ def random_ipv4str():
 
 #test distribution of randomly generated ips, tmp***
 #create_binary_range_file()
-for i in range (10000):
-	random_ipv4str()
+with open("test_random_ip_gerneration.txt", "w") as f:
+	for i in range (10000000):
+		f.write(random_ipv4str() + "\n")
 
 
