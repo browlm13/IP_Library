@@ -213,7 +213,7 @@ def iplist_to_piecsv(infile,outfile,fullname=False, normalized=False, cap=DEFAUL
 	# perecentage
 	for c in countries_data:
 		if normalized == False:	c['percentage'] = c['count']/float(len(ips))
-		else: c['percentage'] = c['count'] * country_ratio(c['country'])
+		else: c['percentage'] = c['count'] * (1/country_ratio(c['country']))		#inverse percentage
 
 		#tmp
 		print ("c: country: %s count: %d, per: %f" % (c['country'], c['count'], c['percentage']))
