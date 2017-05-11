@@ -249,9 +249,10 @@ def iplist_to_piecsv(infile,outfile,fullname=False, normalized=False, cap=DEFAUL
 
 	#export countries into pie_csv format for R script
 	with open(outfile, mode='w+') as f:
+		f.write("country,ratio")
 		for i in range(num_elements):
 			c = countries_data[i]
-			f.write("%s,%f\n" % (strip_country_name(c['country']), c['percentage']))
+			f.write("\n%s,%f" % (strip_country_name(c['country']), c['percentage']))
 
 #global for constant time speed up
 lookup_table = []
