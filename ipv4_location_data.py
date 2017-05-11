@@ -234,9 +234,16 @@ def iplist_to_piecsv(infile,outfile,fullname=False, normalized=False, cap=DEFAUL
 
 	#remaining = 1 - (sum of percentages in chart)
 	sum = 0
-	for i in range(num_elements):
-		sum += countries_data[i]['percentage']
-	remaining = 1-sum
+	remaining = 0
+	if normalized == False:
+		sum = 0
+		for i in range(num_elements):
+			sum += countries_data[i]['percentage']
+		remaining = 1-sum
+	else:
+		for i in range(num_elements,len(countries_data)):
+			remaining += countries_data[i]['percentage']
+
 	remaining_obj = {"country":"remaining", "percentage":remaining}
 	countries_data.insert(0,remaining_obj)
 
