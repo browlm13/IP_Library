@@ -81,9 +81,29 @@ def country_spaces(country):
 		spaces += b['term_2'] - b['term_1']
 	return spaces
 
-#return ratio of country ipspace to total ip space for normalizing
+#find number of blocks allocated to a given country (not number of ip addresses)
+def num_country_blocks(country):
+	global all_blocks
+	
+	num_country_blocks = 0
+
+	#total/specific country
+	if country == "total": 
+		num_country_blocks = len(all_blocks)
+	else: 
+		for b in all_blocks:
+			if b['country_name'] == country or b['country_abr'] == country:
+				num_country_blocks += 1
+	return num_country_blocks
+
+
+
+#return ratio of country blocks from cluster selection for normalizing
 def country_ratio(country):
-	return country_spaces(country)/float(country_spaces("total"))
+	return num_country_blocks(country)/float(num_country_blocks("total"))
+
+#return ratio of country ipspace to total ip space for normalizing
+#return country_spaces(country)/float(country_spaces("total"))
 
 #converts ipv4to decimal number
 def ip_2_dec(ip):
@@ -209,6 +229,10 @@ def iplist_to_piecsv(infile,outfile,fullname=False, normalized=False, cap=DEFAUL
 			if x == c:
 				country_data['count'] = country_data['count'] + 1
 		countries_data.append(country_data)
+
+
+	#test*** norm_scaler
+	#if normalized == True:
 
 	# perecentage
 	for c in countries_data:
